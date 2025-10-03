@@ -59,6 +59,8 @@ Real-world performance improvements using optimization features:
 
 ## 🚀 Installation
 
+For a more in depth guide refer to the [Setup Guide](setup_guide.md)
+
 ### Prerequisites
 
 - Python 3.8 or higher
