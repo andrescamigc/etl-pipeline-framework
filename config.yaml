@@ -1,0 +1,58 @@
+# ETL Pipeline Configuration Template
+# Copy this file to config.yaml and customize for your environment
+
+database:
+  source:
+    host: localhost
+    port: 5432
+    database: source_db
+    username: your_username
+    password: your_password
+    driver: postgresql  # Options: postgresql, mysql, sqlite
+
+  target:
+    host: localhost
+    port: 5432
+    database: target_db
+    username: your_username
+    password: your_password
+    driver: postgresql  # Options: postgresql, mysql, sqlite
+
+pipeline:
+  # Number of rows to process per batch
+  batch_size: 10000
+  
+  # Maximum number of parallel workers
+  max_workers: 4
+  
+  # Enable chunked reading for large datasets
+  chunk_processing: true
+  
+  # Enable parallel loading (recommended for large datasets)
+  parallel_load: false
+  
+  # Enable data quality checks
+  enable_quality_checks: true
+  
+  # Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+  log_level: INFO
+
+quality_checks:
+  # Columns that must not have null values
+  critical_columns:
+    - customer_id
+    - email
+  
+  # Columns that must have unique values
+  unique_keys:
+    - customer_id
+  
+  # Expected data types for validation
+  expected_types:
+    customer_id: int
+    customer_name: object
+    email: object
+    total_purchases: int
+    total_spent: float
+    registration_date: object
+    status: object

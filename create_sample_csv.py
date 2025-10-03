@@ -1,0 +1,76 @@
+"""
+Quick script to generate sample.csv file
+Run this if you want to create the CSV automatically
+"""
+
+import csv
+
+# Sample data
+data = [
+    ['customer_id', 'customer_name', 'email', 'phone', 'country', 'registration_date', 'total_purchases', 'total_spent', 'status', 'last_purchase_date'],
+    [1, 'John Smith', 'john.smith@email.com', '555-0101', 'USA', '2024-01-15', 5, 1250.50, 'active', '2024-09-20'],
+    [2, 'Jane Doe', 'jane.doe@email.com', '555-0102', 'Canada', '2024-02-20', 3, 780.25, 'active', '2024-09-18'],
+    [3, '  Bob Johnson  ', 'bob.j@email.com', '555-0103', 'UK', '2024-03-10', 8, 2100.75, 'active', '2024-09-25'],
+    [4, 'Alice Williams', 'alice.w@email.com', '', 'USA', '2024-01-25', 2, 450.00, 'inactive', '2024-07-15'],
+    [5, 'Charlie Brown', 'CHARLIE.BROWN@EMAIL.COM', '555-0105', 'Australia', '2024-04-05', 12, 3500.80, 'active', '2024-09-22'],
+    [6, 'Diana Martinez', 'diana.m@email.com', '555-0106', 'Spain', '2024-05-12', '', '', 'pending', ''],
+    [7, 'Edward Davis', 'edward.davis@email.com', '555-0107', 'Germany', '2024-02-28', 6, 1890.30, 'active', '2024-09-19'],
+    [8, 'Fiona Garcia', '', '555-0108', 'Mexico', '2024-03-15', 4, 920.00, 'active', '2024-09-10'],
+    [9, 'George Miller', 'george.m@email.com', '555-0109', 'France', '2024-06-01', 15, 4200.00, 'active', '2024-09-24'],
+    [10, 'Hannah Lee', 'hannah.lee@email.com', '555-0110', 'South Korea', '2024-01-30', 7, 1680.50, 'active', '2024-09-21'],
+]
+
+# Add more rows (11-50)
+more_data = [
+    [11, 'Ian Thompson', 'ian.t@email.com', '', 'USA', '2024-07-10', 1, 125.00, 'inactive', '2024-07-10'],
+    [12, 'Julia Anderson', '  julia.a@email.com  ', '555-0112', 'Canada', '2024-02-14', 9, 2450.75, 'active', '2024-09-23'],
+    [13, 'Kevin White', 'kevin.white@email.com', '555-0113', 'UK', '2024-04-20', 3, 680.00, 'active', '2024-08-30'],
+    [14, 'Laura Martin', 'laura.martin@email.com', '555-0114', 'USA', '2024-05-05', 11, 3100.25, 'active', '2024-09-26'],
+    [15, 'Michael Taylor', 'MICHAEL.T@EMAIL.COM', '555-0115', 'Australia', '2024-03-22', 5, 1340.00, 'active', '2024-09-17'],
+    [16, 'Nancy Harris', 'nancy.h@email.com', '', 'Spain', '2024-06-15', 2, 520.50, 'pending', '2024-08-20'],
+    [17, 'Oliver Clark', 'oliver.clark@email.com', '555-0117', 'Germany', '2024-01-18', 8, 2200.80, 'active', '2024-09-20'],
+    [18, 'Patricia Lewis', '', '555-0118', 'Mexico', '2024-04-08', 4, 890.00, 'inactive', '2024-06-15'],
+    [19, '  Quinn Walker  ', 'quinn.w@email.com', '555-0119', 'France', '2024-05-25', 13, 3750.50, 'active', '2024-09-25'],
+    [20, 'Rachel Young', 'rachel.young@email.com', '555-0120', 'South Korea', '2024-02-10', 6, 1590.25, 'active', '2024-09-22'],
+    [21, 'Samuel King', 'samuel.k@email.com', '555-0121', 'USA', '2024-07-01', '', 1200.00, 'pending', ''],
+    [22, 'Tina Scott', 'tina.scott@email.com', '555-0122', 'Canada', '2024-03-30', 7, 1820.75, 'active', '2024-09-24'],
+    [23, 'Uma Green', 'UMA.GREEN@EMAIL.COM', '', 'UK', '2024-04-12', 5, 1150.50, 'active', '2024-09-19'],
+    [24, 'Victor Adams', 'victor.a@email.com', '555-0124', 'Australia', '2024-05-18', 10, 2890.00, 'active', '2024-09-23'],
+    [25, 'Wendy Baker', 'wendy.baker@email.com', '555-0125', 'Spain', '2024-06-22', 3, 720.25, 'inactive', '2024-08-10'],
+    [26, 'Xavier Nelson', 'xavier.n@email.com', '555-0126', 'Germany', '2024-01-20', 9, 2500.80, 'active', '2024-09-21'],
+    [27, 'Yolanda Carter', '', '555-0127', 'Mexico', '2024-02-25', 4, 950.00, 'active', '2024-09-15'],
+    [28, 'Zachary Mitchell', 'zachary.m@email.com', '555-0128', 'France', '2024-03-18', 14, 3920.50, 'active', '2024-09-26'],
+    [29, 'Amy Phillips', 'amy.phillips@email.com', '', 'USA', '2024-04-25', 2, 480.00, 'pending', '2024-08-25'],
+    [30, '  Brian Campbell  ', 'BRIAN.C@EMAIL.COM', '555-0130', 'Canada', '2024-05-30', 8, 2180.75, 'active', '2024-09-22'],
+    [31, 'Catherine Parker', 'catherine.p@email.com', '555-0131', 'UK', '2024-06-08', 6, 1420.50, 'active', '2024-09-20'],
+    [32, 'Daniel Evans', 'daniel.evans@email.com', '555-0132', 'Australia', '2024-01-12', 12, 3300.00, 'active', '2024-09-24'],
+    [33, 'Emma Edwards', '', '555-0133', 'Spain', '2024-02-17', 5, 1180.25, 'inactive', '2024-07-20'],
+    [34, 'Frank Collins', 'frank.c@email.com', '555-0134', 'Germany', '2024-03-25', 7, 1950.80, 'active', '2024-09-19'],
+    [35, 'Grace Stewart', 'GRACE.STEWART@EMAIL.COM', '555-0135', 'Mexico', '2024-04-30', '', '', 'pending', ''],
+    [36, 'Henry Morris', 'henry.m@email.com', '', 'France', '2024-05-15', 9, 2420.50, 'active', '2024-09-23'],
+    [37, 'Iris Rogers', 'iris.rogers@email.com', '555-0137', 'South Korea', '2024-06-20', 4, 890.25, 'active', '2024-09-18'],
+    [38, '  Jack Reed  ', 'jack.reed@email.com', '555-0138', 'USA', '2024-01-28', 11, 3050.75, 'active', '2024-09-25'],
+    [39, 'Kelly Cook', 'kelly.cook@email.com', '555-0139', 'Canada', '2024-02-22', 3, 720.00, 'inactive', '2024-08-05'],
+    [40, 'Leo Morgan', 'leo.morgan@email.com', '555-0140', 'UK', '2024-03-28', 15, 4100.50, 'active', '2024-09-26'],
+    [41, 'Megan Bell', 'megan.b@email.com', '', 'Australia', '2024-04-15', 2, 520.25, 'pending', '2024-08-30'],
+    [42, 'Nathan Murphy', 'NATHAN.M@EMAIL.COM', '555-0142', 'Spain', '2024-05-20', 8, 2250.80, 'active', '2024-09-21'],
+    [43, 'Olivia Bailey', '', '555-0143', 'Germany', '2024-06-25', 5, 1280.00, 'active', '2024-09-17'],
+    [44, 'Paul Rivera', 'paul.rivera@email.com', '555-0144', 'Mexico', '2024-01-22', 10, 2780.50, 'active', '2024-09-24'],
+    [45, '  Quincy Cooper  ', 'quincy.c@email.com', '555-0145', 'France', '2024-02-18', 6, 1620.75, 'active', '2024-09-20'],
+    [46, 'Rose Richardson', 'rose.r@email.com', '555-0146', 'South Korea', '2024-03-23', 13, 3680.25, 'active', '2024-09-22'],
+    [47, 'Steve Cox', 'steve.cox@email.com', '', 'USA', '2024-04-28', 4, 980.00, 'inactive', '2024-07-30'],
+    [48, 'Tracy Howard', 'TRACY.HOWARD@EMAIL.COM', '555-0148', 'Canada', '2024-05-12', 7, 1880.50, 'active', '2024-09-23'],
+    [49, 'Ursula Ward', 'ursula.w@email.com', '555-0149', 'UK', '2024-06-17', 9, 2520.80, 'active', '2024-09-25'],
+    [50, 'Vincent Torres', 'vincent.torres@email.com', '555-0150', 'Australia', '2024-01-15', '', '', 'pending', ''],
+]
+
+data.extend(more_data)
+
+# Write to CSV
+with open('sample.csv', 'w', newline='', encoding='utf-8') as f:
+    writer = csv.writer(f)
+    writer.writerows(data)
+
+print("✅ sample.csv created successfully!")
+print(f"📊 Total rows: {len(data)} (including header)")
+print(f"📁 File saved in current directory")
