@@ -2,12 +2,38 @@
 Simple script to run the ETL pipeline with your sample data
 """
 
+import os
 import pandas as pd
 from datetime import datetime
+from tkinter import Tk, filedialog
 from etl_pipeline import ETLPipeline
 
+# ===== DATABASE SELECTION =====
+# Hide the main tkinter window
+root = Tk()
+root.withdraw()
+root.attributes('-topmost', True)
+
+# Set initial directory to databases folder if it exists
+initial_dir = 'databases' if os.path.exists('databases') else '.'
+
+# Prompt user to select a database file
+print("Please select your database file...")
+db_path = filedialog.askopenfilename(
+    title="Select Database File",
+    initialdir=initial_dir,
+    filetypes=[("SQLite Database", "*.db"), ("All files", "*.*")]
+)
+
+# Check if user cancelled the dialog
+if not db_path:
+    print("❌ No database selected. Exiting.")
+    exit()
+
+DATABASE_FILE = db_path
+print(f"✅ Selected database: {DATABASE_FILE}")
+
 # ===== CONFIGURATION =====
-DATABASE_FILE = 'test_database.db'
 CONNECTION_STRING = f'sqlite:///{DATABASE_FILE}'
 SOURCE_TABLE = 'source_table'
 TARGET_TABLE = 'processed_data'
@@ -123,9 +149,9 @@ except Exception as e:
     print("=" * 60)
     print(f"Error: {str(e)}")
     print("\nTroubleshooting tips:")
-    print("1. Make sure 'sample.csv' exists in the current directory")
-    print("2. Run 'setup_database.py' first to create the database")
-    print("3. Check that all required columns exist in your CSV")
+    print("1. Make sure you selected the correct database file")
+    print("2. Run 'setup_database.py' first to create the database from your CSV")
+    print("3. Check that all required columns exist in your data")
     raise
 
 print("\n" + "=" * 60)
