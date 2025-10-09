@@ -2,6 +2,7 @@
 Setup script to upload CSV file and load it into SQLite database
 Run this to prepare your test data from any CSV file
 """
+import os
 import pandas as pd
 from sqlalchemy import create_engine
 from tkinter import Tk, filedialog
@@ -35,9 +36,19 @@ except Exception as e:
     print(f"❌ Error reading CSV: {e}")
     exit()
 
+# Extract filename without extension and format it
+csv_filename = os.path.basename(csv_path)
+db_name = os.path.splitext(csv_filename)[0].lower().replace(' ', '_')
+
+# Create databases folder if it doesn't exist
+db_folder = 'databases'
+os.makedirs(db_folder, exist_ok=True)
+
+db_path = os.path.join(db_folder, f'{db_name}.db')
+
 # Create SQLite database
-print("\nCreating SQLite database...")
-engine = create_engine('sqlite:///test_database.db')
+print(f"\nCreating SQLite database '{db_path}'...")
+engine = create_engine(f'sqlite:///{db_path}')
 
 # Save CSV data to database as 'source_table'
 df.to_sql('source_table', engine, if_exists='replace', index=False)
@@ -47,4 +58,4 @@ print("✅ Data loaded into database as 'source_table'")
 print("\nVerifying database...")
 test_df = pd.read_sql("SELECT * FROM source_table LIMIT 5", engine)
 print(test_df)
-print(f"\n✅ Setup complete! Database 'test_database.db' is ready.")
+print(f"\n✅ Setup complete! Database '{db_path}' is ready.")
