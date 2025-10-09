@@ -7,6 +7,7 @@ import pandas as pd
 from datetime import datetime
 from tkinter import Tk, filedialog
 from etl_pipeline import ETLPipeline
+import html
 
 # ===== DATABASE SELECTION =====
 # Hide the main tkinter window
@@ -55,12 +56,15 @@ print("✅ Pipeline initialized")
 print("\n2. Defining transformations...")
 
 def clean_text_data(df):
-    """Remove extra whitespace from text columns"""
+    """Remove extra whitespace and HTML entities from text columns"""
     print("   - Cleaning text columns...")
     text_cols = df.select_dtypes(include=['object']).columns
     for col in text_cols:
         if df[col].dtype == 'object':
+            # Strip whitespace
             df[col] = df[col].astype(str).str.strip()
+            # Replace HTML entities
+            df[col] = df[col].apply(html.unescape)
     return df
 
 def add_processing_metadata(df):
