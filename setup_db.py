@@ -1,18 +1,39 @@
 """
-Setup script to load sample.csv into SQLite database
-Run this first to prepare your test data
+Setup script to upload CSV file and load it into SQLite database
+Run this to prepare your test data from any CSV file
 """
-
 import pandas as pd
 from sqlalchemy import create_engine
+from tkinter import Tk, filedialog
 
-# Read your CSV file
-print("Reading sample.csv...")
-df = pd.read_csv('sample.csv')
-print(f"Loaded {len(df)} rows from CSV")
-print(f"Columns: {list(df.columns)}")
-print("\nFirst few rows:")
-print(df.head())
+# Hide the main tkinter window
+root = Tk()
+root.withdraw()
+root.attributes('-topmost', True)
+
+# Prompt user to select a CSV file
+print("Please select your CSV file...")
+csv_path = filedialog.askopenfilename(
+    title="Select CSV File",
+    filetypes=[("CSV files", "*.csv"), ("All files", "*.*")]
+)
+
+# Check if user cancelled the dialog
+if not csv_path:
+    print("❌ No file selected. Exiting.")
+    exit()
+
+# Read the selected CSV file
+print(f"\nReading {csv_path}...")
+try:
+    df = pd.read_csv(csv_path)
+    print(f"✅ Loaded {len(df)} rows from CSV")
+    print(f"Columns: {list(df.columns)}")
+    print("\nFirst few rows:")
+    print(df.head())
+except Exception as e:
+    print(f"❌ Error reading CSV: {e}")
+    exit()
 
 # Create SQLite database
 print("\nCreating SQLite database...")
