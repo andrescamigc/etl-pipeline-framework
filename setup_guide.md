@@ -115,7 +115,7 @@ No setup needed! SQLite creates a file-based database automatically.
 python create_sample_csv.py
 
 # Setup database
-python setup_database.py
+python setup_db.py
 ```
 
 This creates `test_database.db` in your project folder.
@@ -271,7 +271,7 @@ password = os.getenv('DB_PASSWORD')
 python create_sample_csv.py
 
 # 2. Load CSV into database
-python setup_database.py
+python setup_db.py
 
 # 3. Run the pipeline
 python run_pipeline.py

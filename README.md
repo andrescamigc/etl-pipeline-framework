@@ -59,6 +59,8 @@ Real-world performance improvements using optimization features:
 
 ## 🚀 Installation
 
+For a more in-depth guide, refer to the [Setup Guide](setup_guide.md).
+
 ### Prerequisites
 
 - Python 3.8 or higher
@@ -364,31 +366,17 @@ etl-pipeline-framework/
 │
 ├── 📄 etl_pipeline.py           # Main pipeline implementation
 ├── 📄 config_manager.py         # Configuration management
-├── 📄 setup_database.py         # Database setup script
+├── 📄 setup_db.py               # Database setup script
 ├── 📄 run_pipeline.py           # Example pipeline execution
 ├── 📄 create_sample_csv.py      # Sample data generator
 │
 ├── 📄 config.yaml               # Configuration file
 ├── 📄 requirements.txt          # Python dependencies
 ├── 📄 .env.example              # Environment variables template
-├── 📄 .gitignore               # Git ignore rules
+├── 📄 .gitignore                # Git ignore rules
 ├── 📄 LICENSE                   # MIT License
 ├── 📄 README.md                 # This file
-│
-├── 📁 examples/                 # Usage examples
-│   ├── basic_etl.py
-│   ├── advanced_etl.py
-│   └── custom_transformations.py
-│
-├── 📁 tests/                    # Unit tests
-│   ├── test_pipeline.py
-│   ├── test_quality_checks.py
-│   └── test_config_manager.py
-│
-└── 📁 docs/                     # Additional documentation
-    ├── architecture.md
-    ├── best_practices.md
-    └── troubleshooting.md
+
 ```
 
 ## 🔧 Advanced Features
@@ -439,21 +427,6 @@ print(f"Failed rows: {metrics.rows_failed:,}")
 print(f"Throughput: {metrics.rows_processed / metrics.processing_time:.0f} rows/second")
 ```
 
-## 🧪 Testing
-
-Run the test suite:
-
-```bash
-# Run all tests
-pytest
-
-# Run with coverage report
-pytest --cov=. --cov-report=html
-
-# Run specific test file
-pytest tests/test_pipeline.py -v
-```
-
 ## 📚 Additional Resources
 
 - **[Architecture Documentation](docs/architecture.md)** - Detailed system design
@@ -464,18 +437,6 @@ pytest tests/test_pipeline.py -v
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-```
-MIT License
-
-Copyright (c) 2025 Andrés Garavito
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software...
-```
 
 ## 👤 Author
 
